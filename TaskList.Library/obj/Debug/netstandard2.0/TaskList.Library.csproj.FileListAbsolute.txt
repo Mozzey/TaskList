@@ -1,0 +1,9 @@
+C:\Users\Mozzey\GrandCircus\Capstones\TaskList\TaskList.Library\bin\Debug\netstandard2.0\TaskList.Library.deps.json
+C:\Users\Mozzey\GrandCircus\Capstones\TaskList\TaskList.Library\bin\Debug\netstandard2.0\TaskList.Library.dll
+C:\Users\Mozzey\GrandCircus\Capstones\TaskList\TaskList.Library\bin\Debug\netstandard2.0\TaskList.Library.pdb
+C:\Users\Mozzey\GrandCircus\Capstones\TaskList\TaskList.Library\obj\Debug\netstandard2.0\TaskList.Library.csprojAssemblyReference.cache
+C:\Users\Mozzey\GrandCircus\Capstones\TaskList\TaskList.Library\obj\Debug\netstandard2.0\TaskList.Library.csproj.CoreCompileInputs.cache
+C:\Users\Mozzey\GrandCircus\Capstones\TaskList\TaskList.Library\obj\Debug\netstandard2.0\TaskList.Library.AssemblyInfoInputs.cache
+C:\Users\Mozzey\GrandCircus\Capstones\TaskList\TaskList.Library\obj\Debug\netstandard2.0\TaskList.Library.AssemblyInfo.cs
+C:\Users\Mozzey\GrandCircus\Capstones\TaskList\TaskList.Library\obj\Debug\netstandard2.0\TaskList.Library.dll
+C:\Users\Mozzey\GrandCircus\Capstones\TaskList\TaskList.Library\obj\Debug\netstandard2.0\TaskList.Library.pdb
