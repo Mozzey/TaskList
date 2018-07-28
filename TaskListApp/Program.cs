@@ -10,50 +10,38 @@ namespace TaskListApp
         static void Main(string[] args)
         {
             bool isRunning = true;
+            List<Task> listOfTasks = new List<Task>();
+            var taskLists = new ListTasks(listOfTasks);
 
-            /*
-            var task1 = new Task("firstName lastName", "simple task", DateTime.Now.ToString("MM/dd/yyyy"));
-            var task2 = new Task("mozzey magick", "test two and random text to take up space", DateTime.Now.ToString("MM/dd/yyyy"));
-            var task3 = new Task("magick", "test thre but with more words", DateTime.Now.ToString("MM/dd/yyyy"));
-            */
             while (isRunning)
             {
-
-
-                List<Task> taskList = new List<Task>();
                 string mainMenu = MainMenu();
                 Console.WriteLine(mainMenu);
                 Console.Write("What would you like to do? ");
-                string option = Console.ReadLine();
-                if (int.TryParse(option, out int validOption))
+                int option = int.Parse(Console.ReadLine());
+                if (option == 1)
                 {
-                    switch (validOption)
-                    {
-                        case 1:
-                            ListTasks.DisplayTasks(taskList);
-                            break;
-                        case 2:
-                            var task = AddTask.AddNewTask();
-                            taskList.Add(task);
-                            break;
-                        case 3:
-                            Console.WriteLine("WIP");
-                            break;
-                        case 4:
-                            Console.WriteLine("WIP");
-                            break;
-                        case 5:
-                            Console.WriteLine("Goodbye!");
-                            isRunning = false;
-                            break;
-                        default:
-                            break;
-                    }
+                    taskLists.DisplayTaskList();
                 }
-
-
-
-                Console.ReadLine();
+                else if (option == 2)
+                {
+                    var task = AddTask.AddNewTask();
+                    taskLists.AddToList(task);
+                }
+                else if (option == 3)
+                {
+                    Console.WriteLine("wip");
+                }
+                else if (option == 4)
+                {
+                    Console.WriteLine("wip");
+                }
+                else if (option == 5)
+                {
+                    Console.WriteLine("Goodbye");
+                    Console.ReadKey();
+                    isRunning = false;
+                }
             }
         }
 
