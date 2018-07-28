@@ -15,26 +15,16 @@ namespace TaskList.Library
             TaskList.Add(task);
         }
         
-        public void DisplayTaskList()
+        public void DisplayTaskList(List<Task> taskList)
         {
-            string categories = String.Format("{0, -4}{1,-10}{2,-14}{3,-21}{4,-22}", "#", "Complete", "Due Date",
-                "Team Member", "Description");
-            Console.WriteLine(categories);
-            Console.WriteLine("  -------------------------------------------------------------");
-            foreach (var task in TaskList)
+            
+            for (int i = 0; i < taskList.Count; i++)
             {
-                Console.WriteLine(FormatTask(task));
+                string formattedTask = String.Format("{0,-4} {1,-7} {2,-14} {3, -20} {4, -25}",
+                    $"{i+1}.", "False", taskList[i].DueDate, taskList[i].TeamMember, taskList[i].Description);
+                Console.WriteLine(formattedTask);
             }
+            Console.WriteLine();
         }
-
-        public static string FormatTask(Task task)
-        {
-            int taskNumber = 1;
-            string taskFormatting = String.Format("{0,-4} {1,-7} {2,-14} {3, -20} {4, -25}",
-                    $"{taskNumber}.", "False", $"{task.DueDate}", task.TeamMember, task.Description);
-            taskNumber++;
-            return taskFormatting;
-        }
-
     }
 }

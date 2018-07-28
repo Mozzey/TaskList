@@ -9,38 +9,35 @@ namespace TaskListApp
     {
         static void Main(string[] args)
         {
+            var taskList = new TasksList(); 
             bool isRunning = true;
-            List<Task> listOfTasks = new List<Task>();
-            var taskLists = new ListTasks(listOfTasks);
-
             while (isRunning)
             {
+                
                 string mainMenu = MainMenu();
                 Console.WriteLine(mainMenu);
                 Console.Write("What would you like to do? ");
                 int option = int.Parse(Console.ReadLine());
-                if (option == 1)
+                Console.WriteLine();
+                switch (option)
                 {
-                    taskLists.DisplayTaskList();
-                }
-                else if (option == 2)
-                {
-                    var task = AddTask.AddNewTask();
-                    taskLists.AddToList(task);
-                }
-                else if (option == 3)
-                {
-                    Console.WriteLine("wip");
-                }
-                else if (option == 4)
-                {
-                    Console.WriteLine("wip");
-                }
-                else if (option == 5)
-                {
-                    Console.WriteLine("Goodbye");
-                    Console.ReadKey();
-                    isRunning = false;
+                    case 1:
+                        taskList.DisplayList();
+                        break;
+                    case 2:
+                        taskList.AddTask();
+                        break;
+                    case 3:
+                        break;
+                    case 4:
+                        break;
+                    case 5:
+                        Console.WriteLine("Have a Great Day!!");
+                        Console.ReadKey();
+                        isRunning = false;
+                        break;
+                    default:
+                        break;
                 }
             }
         }

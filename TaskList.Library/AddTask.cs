@@ -6,21 +6,26 @@ namespace TaskList.Library
 {
     public class AddTask
     {
+        public static string TeamMember;
+        public static string DueDate;
+        public static string Description;
+        public static List<Task> TaskList;
         public static Task NewTask = new Task(TeamMember, Description, DueDate);
-        public static string TeamMember { get; set; }
-        public static string DueDate { get; set; }
-        public static string Description { get; set; }
 
-        public static Task AddNewTask()
+        public AddTask(List<Task> taskList)
         {
-            Console.Write("Enter team member name: ");
+            TaskList = taskList;
+        }
+        public static void AddNewTask(List<Task> taskList)
+        {
+            Console.Write("Team member name: ");
             NewTask.TeamMember = Console.ReadLine();
-            Console.Write("Enter a due date for this task: ");
-            NewTask.DueDate = Console.ReadLine();
-            Console.Write("Enter a brief description about the task: ");
+            Console.Write("Task Description: ");
             NewTask.Description = Console.ReadLine();
+            Console.Write("Due Date: ");
+            NewTask.DueDate = Console.ReadLine();
             Console.WriteLine("Task Entered!");
-            return NewTask;
+            taskList.Add(NewTask);
         }
 
 
