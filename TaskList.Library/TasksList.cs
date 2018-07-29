@@ -51,7 +51,7 @@ namespace TaskList.Library
             Console.Write("Please enter a task number to be deleted: ");
             var taskNumber = Console.ReadLine();
             
-            if (int.TryParse(taskNumber, out int validTask))
+            if (int.TryParse(taskNumber, out int validTask) && (validTask > 0 && validTask <= this.Count))
             {
                 for (int i = 0; i < this.Count; i++)
                 {
@@ -73,6 +73,9 @@ namespace TaskList.Library
             }
             else
             {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("Sorry but you must enter a valid integer that matches a task.");
+                Console.ForegroundColor = ConsoleColor.White;
                 DeleteTask();
             }
         }
@@ -80,31 +83,40 @@ namespace TaskList.Library
         public void MarkTaskComplete()
         {
             Console.Write("Please enter a task number to be marked comlplete: ");
-            var taskNumber = Console.ReadLine();
-
-            if (int.TryParse(taskNumber, out int validTask))
+            var taskNumber = IsValidInt();
+            for (int i = 0; i < this.Count; i++)
             {
-                for (int i = 0; i < this.Count; i++)
+                if (taskNumber == (i + 1))
                 {
-                    if (validTask == (i + 1))
+                    Console.WriteLine("Are you sure you wont to mark this task Complete? (Y/N)");
+                    this.DisplayTask(i);
+                    var confirmation = Console.ReadLine().ToUpper();
+                    if (confirmation.StartsWith("Y"))
                     {
-                        Console.WriteLine("Are you sure you wont to mark this task Complete? (Y/N)");
-                        this.DisplayTask(i);
-                        var confirmation = Console.ReadLine().ToUpper();
-                        if (confirmation.StartsWith("Y"))
-                        {
-                            this[i].Completed = true;
-                        }
-                        else if (confirmation.StartsWith("N"))
-                        {
-                            MainMenu();
-                        }
+                        this[i].Completed = true;
+                    }
+                    else if (confirmation.StartsWith("N"))
+                    {
+                        MainMenu();
                     }
                 }
             }
+        }
+
+        public int IsValidInt()
+        {
+            var taskNumber = Console.ReadLine();
+            if (int.TryParse(taskNumber, out int validTask) && validTask > 0 && validTask <= this.Count)
+            {
+                return validTask;
+            }
             else
             {
-                MarkTaskComplete();
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("Sorry but you must enter a valid integer that matches a task number.");
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.Write("Please enter a task number to be marked complete: ");
+                return IsValidInt();
             }
         }
     }
