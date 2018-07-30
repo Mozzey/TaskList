@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
+using System.Text.RegularExpressions;
 
 namespace TaskList.Library
 {
@@ -9,11 +9,11 @@ namespace TaskList.Library
         public void AddTask()
         {
             Console.Write("Team member name: ");
-            string teamMember = Console.ReadLine();
+            string teamMember = IsValidName();
             Console.Write("Task Description: ");
             string description = Console.ReadLine();
             Console.Write("Due Date: ");
-            string dueDate = Console.ReadLine();
+            string dueDate = IsValidDate();
             Console.WriteLine("Task Entered!");
             this.Add(new Task(teamMember, description, dueDate));
         }
@@ -48,6 +48,8 @@ namespace TaskList.Library
         }
         public void DeleteTask()
         {
+
+            Console.ForegroundColor = ConsoleColor.White;
             Console.Write("Please enter a task number to be deleted: ");
             var taskNumber = Console.ReadLine();
             
@@ -58,6 +60,7 @@ namespace TaskList.Library
                     if (validTask == (i + 1))
                     {
                         Console.WriteLine("Are you sure you wont to delete this task? (Y/N)");
+                        Console.ForegroundColor = ConsoleColor.Red;
                         this.DisplayTask(i);
                         var confirmation = Console.ReadLine().ToUpper();
                         if (confirmation.StartsWith("Y"))
@@ -82,13 +85,15 @@ namespace TaskList.Library
 
         public void MarkTaskComplete()
         {
-            Console.Write("Please enter a task number to be marked comlplete: ");
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.Write("Please enter a task number to be marked complete: ");
             var taskNumber = IsValidInt();
             for (int i = 0; i < this.Count; i++)
             {
                 if (taskNumber == (i + 1))
                 {
-                    Console.WriteLine("Are you sure you wont to mark this task Complete? (Y/N)");
+                    Console.WriteLine("Are you sure you want to mark this task Complete? (Y/N)");
+                    Console.ForegroundColor = ConsoleColor.Green;
                     this.DisplayTask(i);
                     var confirmation = Console.ReadLine().ToUpper();
                     if (confirmation.StartsWith("Y"))
@@ -117,6 +122,41 @@ namespace TaskList.Library
                 Console.ForegroundColor = ConsoleColor.White;
                 Console.Write("Please enter a task number to be marked complete: ");
                 return IsValidInt();
+            }
+        }
+
+        public string IsValidDate()
+        {
+            var dueDate = Console.ReadLine();
+            if (DateTime.TryParse(dueDate, out DateTime validDate) && validDate > DateTime.Now)
+            {
+                return validDate.ToString("MM/dd/yyyy");
+            }
+            else
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("Sorry but yur due date can't be before the current day and must in the form of mm/dd/yyyy");
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.Write("Please enter a due date: ");
+                return IsValidDate();
+            }
+        }
+
+        public string IsValidName()
+        {
+            var validName = @"[A-Za-z]+\s?[A-Za-z]+";
+            var teamMember = Console.ReadLine();
+            if (Regex.IsMatch(teamMember, validName))
+            {
+                return teamMember;
+            }
+            else
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("Sorry but name must consist of all only letters either lower or upper case");
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.Write("Team Member Name:");
+                return IsValidName();
             }
         }
     }
